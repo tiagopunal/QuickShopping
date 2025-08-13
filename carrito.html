@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carrito de Compras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; }
+
+    /* Barra de navegación */
+    .navbar {
+        background: #222; color: #fff;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 15px; position: relative;
+    }
+    .menu-icon { font-size: 24px; cursor: pointer; }
+    .navbar-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 1.4em; font-weight: bold; }
+    .right-icons { display: flex; gap: 15px; font-size: 20px; }
+    .right-icons a { color: white; text-decoration: none; }
+
+    /* Menú desplegable */
+    .dropdown {
+        display: none; position: absolute; top: 50px; left: 10px;
+        background: #333; list-style: none; padding: 0; margin: 0; border-radius: 5px; width: 200px;
+    }
+    .dropdown.show { display: block; }
+    .dropdown a, .dropdown summary {
+        display: block; padding: 10px 15px; color: white; text-decoration: none; cursor: pointer; font-size: 14px;
+    }
+    .dropdown a:hover, .dropdown summary:hover { background: #444; }
+    .dropdown ol { list-style: none; margin: 0; padding: 0; background: #222; }
+    .dropdown ol li a { padding-left: 25px; font-size: 13px; color: #ddd; }
+    .dropdown ol li a:hover { background: #444; color: white; }
+    summary::-webkit-details-marker { display: none; }
+
+    /* Carrito */
+    .container { max-width: 1100px; margin: auto; padding: 20px; }
+    .carrito-item img { width: 80px; border-radius: 8px; margin-right: 10px; }
+    .info { flex: 1; }
+    .borrar-producto { background: #222; color:#fff; border: none; padding: 10px 12px; border-radius: 6px; cursor: pointer; }
+    .borrar-producto:hover { background: #444; }
+    .cantidad-btn { background: #ddd; border: none; padding: 3px 7px; margin: 0 3px; cursor: pointer; border-radius: 4px; }
+    .total { font-size: 1.3em; font-weight: bold; text-align: right; margin-top: 20px; }
+    .carrito-item { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; margin-left: auto;}
+
+    .btn-comprar { width: 100%; padding: 12px; background: #222; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+    .btn-comprar:hover {background: #444; }
+</style>
+</head>
+<body>
+
+<!-- Barra de navegación -->
+<div class="navbar">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="navbar-title">KickShopping</div>
+    <div class="right-icons">
+        <a href="usuario.html">👤</a>
+        <a href="carrito.html">🛒</a>
+    </div>
+</div>
+
+<!-- Menú desplegable -->
+<ul class="dropdown" id="menu">
+    <li><a href="#">Inicio</a></li>
+    <details>
+        <summary>Hombre ‣</summary>
+        <ol>
+            <li><a href="#">Calzones</a></li>
+            <li><a href="#">Gorras</a></li>
+            <li><a href="#">Pantalones</a></li>
+        </ol>
+    </details>
+    <details>
+        <summary>Mujer ‣</summary>
+        <ol>
+            <li><a href="#">Vestidos</a></li>
+            <li><a href="#">Blusas</a></li>
+            <li><a href="#">Faldas</a></li>
+        </ol>
+    </details>
+    <li><a href="#">Contacto</a></li>
+</ul>
+
+<!-- Contenido -->
+<div class="container">
+    <h2>Carrito de Compras</h2>
+    <div id="carrito-lista"></div>
+    <div class="total" id="carrito-total">Total: $0.00</div>
+    <button class="btn-comprar" onclick="realizarCompra()">Realizar compra</button>
+    
+</div>
+
+<script>
+    const carrito = [
+        { id: 1, nombre: "Camisa Deportiva", descripcion: "Camisa de algodón para hombre.", precio: 20000, cantidad: 1, imagen: "/home/laure/Escritorio/kickshopping/img/buzo.jpeg" },
+        { id: 2, nombre: "Pantalón Jeans", descripcion: "Pantalón azul clásico.", precio: 65000, cantidad: 1, imagen: "/home/laure/Escritorio/kickshopping/img/buzo.jpeg" }
+    ];
+
+    function toggleMenu() {
+        document.getElementById('menu').classList.toggle('show');
+    }
+
+    
+    function mostrarCarrito() {
+        const lista = document.getElementById('carrito-lista');
+        lista.innerHTML = '';
+        let total = 0;
+        carrito.forEach((item, index) => {
+            total += item.precio * item.cantidad;
+            lista.innerHTML += `
+                <div class="carrito-item">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <div class="info">
+                        <strong>${item.nombre}</strong><br>
+                        <span>${item.descripcion}</span><br>
+                        <button class="cantidad-btn" onclick="cambiarCantidad(${index}, -1)">−</button>
+                        ${item.cantidad}
+                        <button class="cantidad-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
+                        <span> | $${item.precio.toFixed(2)}</span>
+                        <button class="borrar-producto" onclick="borrarProducto(${index})">Borrar</button>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('carrito-total').textContent = 'Total: $' + total.toFixed(2);
+    }
+
+    function cambiarCantidad(index, cambio) {
+        carrito[index].cantidad += cambio;
+        if (carrito[index].cantidad < 1) carrito[index].cantidad = 1;
+        mostrarCarrito();
+    }
+
+    function realizarCompra() {
+        alert('¡Compra realizada!');
+    }
+
+    mostrarCarrito();
+</script>
+
+</body>
+</html>
