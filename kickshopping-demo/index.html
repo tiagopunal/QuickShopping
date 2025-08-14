@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kickshopping - Inicio (demo)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="site">
+    <header class="topbar" role="banner">
+      <div class="header-bar">
+        <div class="header-left">
+          <button class="icon-btn" title="menu" id="menuBtn">☰</button>
+        </div>
+        <div class="header-center">
+          <h1 class="site-title">Kickshopping</h1>
+        </div>
+        <div class="header-right">
+          <button class="icon-btn" title="usuario" id="userBtn">👤</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- TENDENCIAS etiqueta discreta -->
+      <div class="tendencias-label">TENDENCIAS</div>
+      <section class="hero" aria-label="Hero Hombre">
+        <div class="hero-inner">
+          <div class="hero-title">ropa de hombre</div>
+          <div class="hero-sub">Colección curada · edición limitada</div>
+          <div class="grid" id="productGridHombre"></div>
+          <div class="hero-footer">
+            <div class="filter-row">
+              <div class="chip">nuevos</div>
+              <div class="chip">más vendidos</div>
+              <div class="chip">ofertas</div>
+            </div>
+            <div class="muted-line" id="countLabelHombre">Mostrando 0 productos</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero" aria-label="Hero Mujer">
+        <div class="hero-inner">
+          <div class="big-label">TENDENCIAS</div>
+          <div style="height:36px"></div>
+          <div class="hero-title">ropa de mujer</div>
+          <div class="hero-sub">Colección curada · edición limitada</div>
+          <div class="grid" id="productGridMujer"></div>
+          <div class="hero-footer">
+            <div class="filter-row">
+              <div class="chip">nuevos</div>
+              <div class="chip">más vendidos</div>
+              <div class="chip">ofertas</div>
+            </div>
+            <div class="muted-line" id="countLabelMujer">Mostrando 0 productos</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-footer" aria-label="pie-de-pagina">
+        <div>© Kickshopping</div>
+        <div class="muted-line">Términos · Aviso de privacidad · Contacto</div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
